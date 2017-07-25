@@ -1,0 +1,35 @@
+{
+  "name": "react-cross-platform-cli",
+  "version": "1.0.0",
+  "description": "Command line interface to create a boilerplate for a cross platform react application.",
+  "bin": {
+    "react-cross-platform-cli": "bin/index.js"
+  },
+  "main": "index.js",
+  "preferGlobal": "true",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thomasheyenbrock/react-cross-platform-cli.git"
+  },
+  "keywords": [
+    "react",
+    "react-native",
+    "react-native-web",
+    "electron"
+  ],
+  "author": "Thomas Heyenbrock",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thomasheyenbrock/react-cross-platform-cli/issues"
+  },
+  "homepage": "https://github.com/thomasheyenbrock/react-cross-platform-cli#readme",
+  "devDependencies": {},
+  "dependencies": {
+    "minimist": "^1.2.0",
+    "react-native-cli": "^2.0.1",
+    "readline-sync": "^1.4.7"
+  }
+}
