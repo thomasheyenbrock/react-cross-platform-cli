@@ -9,7 +9,7 @@ import {
 /**
  * Main component for the whole app.
  */
-export default class ExampleApp extends React.Component {
+export default class App extends React.Component {
     /**
      * Render the content.
      * @return {React.Component} The rendered content of this component.
