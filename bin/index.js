@@ -70,6 +70,9 @@ function init() {
 
         console.log('Copying files...');
         copyFiles(project.project.name, project.web, project.desktop);
+        console.log('');
+        console.log('Doing stuff...');
+        correctXcodeProject(project.project.name);
 
         console.log('');
         console.log('We did it! Happy coding :)');
@@ -172,7 +175,7 @@ function readInput() {
         project['devDependencies']['offline-plugin'] = '^4.7.0';
         project['dependencies']['react-dom'] = '^15.4.2';
         project['devDependencies']['react-hot-loader'] = '^1.3.1';
-        project['devDependencies']['react-native-web'] = '^0.0.88';
+        project['dependencies']['react-native-web'] = '^0.0.88';
         project['devDependencies']['url-loader'] = '^0.5.8';
         project['devDependencies']['webpack'] = '^2.4.1';
         project['devDependencies']['webpack-dev-server'] = '^2.4.2';
@@ -231,4 +234,16 @@ function copyFiles(name, web, desktop) {
         var fileContent = fs.readFileSync(path.join(__dirname, 'webpack.config.js'), 'utf8');
         fs.writeFileSync(path.join(path.resolve('.'), name, 'web', 'webpack.config.js'), fileContent);
     }
+}
+
+function correctXcodeProject(name) {
+    var filePath = path.join(path.resolve('.'), name, 'ios', name + '.xcodeproj', 'project.pbxproj');
+    var xcode = fs.readFileSync(filePath, 'utf8');
+    xcode = xcode.replace(/shellScript\ \=\ \"export\ NODE_BINARY\=node\\n\.\.\/node_modules\/react\-native\/scripts\/react-native-xcode\.sh\"\;/g, 'shellScript = "export NODE_BINARY=node\\n../node_modules/react-native/packager/react-native-xcode.sh";');
+    fs.writeFileSync(filePath, xcode);
+
+    filePath = path.join(path.resolve('.'), name, 'ios', name + 'Tests', name + 'Tests.m');
+    xcode = fs.readFileSync(filePath, 'utf8');
+    xcode = xcode.replace(/UIViewController\ \*vc\ \=\ \[\[\[RCTSharedApplication\(\)\ delegate\]\ window\]\ rootViewController\]\;/g, 'UIViewController *vc = [[[[UIApplication sharedApplication] delegate] window] rootViewController];');
+    fs.writeFileSync(filePath, xcode);
 }
