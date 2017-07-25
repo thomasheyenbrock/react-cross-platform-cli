@@ -1,6 +1,6 @@
 {
   "name": "react-cross-platform-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Command line interface to create a boilerplate for a cross platform react application.",
   "bin": {
     "react-cross-platform-cli": "bin/index.js"
