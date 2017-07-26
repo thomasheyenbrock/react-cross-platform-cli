@@ -29,7 +29,6 @@
   "devDependencies": {},
   "dependencies": {
     "minimist": "^1.2.0",
-    "react-native-cli": "^2.0.1",
     "readline-sync": "^1.4.7"
   }
 }
