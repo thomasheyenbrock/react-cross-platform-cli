@@ -21,7 +21,7 @@ export default class App extends React.Component {
                     Welcome to React Native! ({Platform.OS})
                 </Text>
                 <Text style={styles.instructions}>
-                    To get started, edit index.&lt;platform&gt;.js
+                    To get started, edit app.js
                 </Text>
                 <Text style={styles.instructions}>
                     For reload do a double tap R or Cmd+R on your keyboard.
