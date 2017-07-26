@@ -57,53 +57,84 @@ function printVersion() {
 function init() {
     console.log('Hello stranger! Let\'s begin to set up your cross platform react application.');
 
-    checkForYarn(function() {
-        console.log('Please answer the following questions:');
-        console.log('');
-        var project = readInput();
+    checkForYarn(function(yarn) {
+        checkForReactNativeCli(function() {
+            console.log('Please answer the following questions:');
+            console.log('');
+            var project = readInput();
 
-        console.log('');
-        console.log('Initializing application...');
-        execSync('react-native init ' + project.project.name);
-        fs.writeFileSync(path.join(path.resolve('.'), project.project.name, 'package.json'), JSON.stringify(project.project, null, 2));
-        execSync('cd ' + project.project.name + ' && rm -r -f node_modules && yarn');
+            console.log('');
+            console.log('Initializing application...');
+            execSync('react-native init ' + project.project.name);
+            fs.writeFileSync(path.join(path.resolve('.'), project.project.name, 'package.json'), JSON.stringify(project.project, null, 2));
+            execSync('cd ' + project.project.name + ' && rm -r -f node_modules && ' + (yarn ? 'yarn' : 'npm install'));
 
-        console.log('Copying files...');
-        copyFiles(project.project.name, project.web, project.desktop);
-        console.log('');
-        console.log('Doing stuff...');
-        correctXcodeProject(project.project.name);
+            console.log('Copying files...');
+            copyFiles(project.project.name, project.web, project.desktop);
+            console.log('');
+            console.log('Doing stuff...');
+            correctXcodeProject(project.project.name);
 
-        console.log('');
-        console.log('We did it! Happy coding :)');
-        console.log('');
-        process.exit();
+            console.log('');
+            console.log('We did it! Happy coding :)');
+            console.log('');
+            process.exit();
+        });
     });
 }
 
 function checkForYarn(callback) {
     require('child_process').exec('yarn --version', (error, stdout, stderr) => {
         if (stderr === '' && stdout.replace('\n', '').match(/^[0-9]+.[0-9]+.[0-9]+$/)) {
-            callback();
+            callback(true);
         } else {
-            installYarn(callback);
+            console.log('It seems that you don\'t have yarn installed. We recommend it as package manager as it is much faster than npm.');
+            console.log('');
+            var install = readline.question('\tDo you want to install yarn globally now? Enter Y/n: ');
+            console.log('');
+            if (install === 'y' || install === 'Y') {
+                installYarn(callback);
+            } else {
+                callback(false);
+            }
         }
     });
 }
 
 function installYarn(callback) {
-    console.log('It seems that you don\'t have yarn installed. You will like it, believe me!');
+    console.log('Installing yarn...');
+    let response = execSync('npm install -g yarn').toString();
+    if (response.indexOf('npm ERR!') > -1) {
+        console.log('Oh no, something went wrong! Try to install yarn manually and come back later!');
+        process.exit();
+    }
+    console.log('Horray! You now have yarn installed.');
+    callback(true);
+}
+
+function checkForReactNativeCli(callback) {
+    require('child_process').exec('react-native --version', (error, stdout, stderr) => {
+        if (stderr === '' && stdout.substr(0, 17) === 'react-native-cli:') {
+            callback();
+        } else {
+            installReactNativeCli(callback);
+        }
+    });
+}
+
+function installReactNativeCli(callback) {
+    console.log('It seems that you don\'t have react-native-cli installed. We need this to initialize your application.');
     console.log('');
-    var install = readline.question('\tDo you want to install yarn globally now? Enter Y/n: ');
+    var install = readline.question('\tDo you want to install react-native-cli globally now? Enter Y/n: ');
     console.log('');
     if (install === 'y' || install === 'Y') {
-        console.log('Installing yarn...');
-        let response = execSync('npm install -g yarn').toString();
+        console.log('Installing react-native-cli...');
+        let response = execSync('npm install -g react-native-cli').toString();
         if (response.indexOf('npm ERR!') > -1) {
-            console.log('Oh no, something went wrong! Try to install yarn manually and come back later!');
+            console.log('Oh no, something went wrong! Try to install react-native-cli manually and come back later!');
             process.exit();
         }
-        console.log('Horray! You now have yarn installed.');
+        console.log('Horray! You now have react-native-cli installed.');
         callback();
     } else {
         console.log('What a shame, you are missing some good stuff! Come back later if you change your mind :)');
