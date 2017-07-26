@@ -19,7 +19,9 @@ Install the CLI globally on your machine using `npm`:
 npm install -g react-cross-platform-cli
 ```
 
-The CLI uses `yarn` as package manager. You can either install `yarn` manually or let the CLI do this for you. (In the future this CLI shall also work using native `npm` instead of `yarn`.)
+The recommended package manager is `yarn`. If you don't have it installed, you can let the CLI do it for you. If you don't want to use yarn, the CLI will go on using `npm` as package manager.
+
+The CLI uses `react-native-cli` to initialize the application. You can either install `react-native-cli` manually or let the CLI do this for you.
 
 ## Usage
 
