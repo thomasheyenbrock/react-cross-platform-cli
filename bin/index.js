@@ -217,7 +217,7 @@ function readInput() {
 
     if (desktop === 'y' || desktop === 'Y') {
         project['main'] = 'index.desktop.js';
-        project['scripts']['desktop'] = 'npm run web:build && electron .';
+        project['scripts']['desktop'] = 'npm run web:build & electron .';
         project['dependencies']['electron'] = '^1.6.11';
     }
 
