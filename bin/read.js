@@ -34,8 +34,8 @@ module.exports = function readInput() {
             'ios:clean': 'rm -r -f ios/build'
         },
         dependencies: {
-            'react': "16.0.0-alpha.6",
-            'react-native': "0.43.4"
+            'react': '16.0.0-alpha.6',
+            'react-native': '0.43.4'
         },
         devDependencies: {
             'babel-jest': '19.0.0',
@@ -44,7 +44,7 @@ module.exports = function readInput() {
             'react-test-renderer': '16.0.0-alpha.6'
         },
         jest: {
-            preset: "react-native"
+            preset: 'react-native'
         }
     };
 
