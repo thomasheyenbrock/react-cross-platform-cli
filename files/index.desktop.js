@@ -18,13 +18,17 @@ function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({width: 800, height: 600});
 
-    // and load the index.html of the app.
-    mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname, 'web', 'build', 'index.html'),
-        protocol: 'file:',
-        slashes: true
-    }));
-
+    // and load the index.html of the app in production
+    // or localhost on port 3000 in development
+    if (process.env.NODE_ENV === 'development') {
+        mainWindow.loadURL('http://localhost:3000');
+    } else {
+        mainWindow.loadURL(url.format({
+            pathname: path.join(__dirname, 'web', 'build', 'index.html'),
+            protocol: 'file:',
+            slashes: true
+        }));
+    }
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()
 
