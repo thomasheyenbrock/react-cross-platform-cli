@@ -1,5 +1,9 @@
 # react-cross-platform-cli
 
+[![Travis Build Status](https://travis-ci.org/thomasheyenbrock/react-cross-platform-cli.svg?branch=master)](https://travis-ci.org/thomasheyenbrock/react-cross-platform-cli)
+[![dependencies Status](https://david-dm.org/thomasheyenbrock/react-cross-platform-cli/status.svg)](https://david-dm.org/thomasheyenbrock/react-cross-platform-cli)
+[![npm version](https://badge.fury.io/js/react-cross-platform-cli.svg)](https://badge.fury.io/js/react-cross-platform-cli)
+
 This project servers as a simple command line interface. One can use it to generate a boilerplate project for a cross platform react application.
 
 ## Included platforms
