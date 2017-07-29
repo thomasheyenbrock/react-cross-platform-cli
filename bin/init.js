@@ -2,12 +2,12 @@ var execSync = require('child_process').execSync;
 var fs = require('fs');
 var path = require('path');
 
-var adjustDesktop = require('./adjustDesktop');
-var adjustIos = require('./adjustIos');
-var copyFiles = require('./copyFiles');
-var dependencyAsar = require('./dependencyAsar');
-var dependencyReactNativeCli = require('./dependencyReactNativeCli');
-var dependencyYarn = require('./dependencyYarn');
+var adjustDesktop = require('./adjust-desktop');
+var adjustIos = require('./adjust-ios');
+var copyFiles = require('./copy-files');
+var dependencyAsar = require('./dependency-asar');
+var dependencyReactNativeCli = require('./dependency-react-native-cli');
+var dependencyYarn = require('./dependency-yarn');
 var read = require('./read');
 
 function build(yarn, project) {
