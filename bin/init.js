@@ -5,7 +5,6 @@ var path = require('path');
 var adjustDesktop = require('./adjust-desktop');
 var adjustIos = require('./adjust-ios');
 var copyFiles = require('./copy-files');
-var dependencyAsar = require('./dependency-asar');
 var dependencyReactNativeCli = require('./dependency-react-native-cli');
 var dependencyYarn = require('./dependency-yarn');
 var read = require('./read');
@@ -39,15 +38,7 @@ module.exports = function init() {
             console.log('');
             var project = read();
 
-            if (project.desktop) {
-                dependencyAsar(function() {
-                    build(yarn, project);
-                });
-            } else {
-                build(yarn, project);
-            }
-
-
+            build(yarn, project);
         });
     });
 }

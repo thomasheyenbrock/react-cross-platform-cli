@@ -25,19 +25,24 @@ module.exports = function copyFiles(name, web, desktop) {
     });
 
     if (web || desktop) {
-        execSync('mkdir -pv ' + path.join(path.resolve('.'), name, 'web', 'templates'));
+        fs.mkdir(path.join(path.resolve('.'), name, 'script'));
+        fs.mkdir(path.join(path.resolve('.'), name, 'web'));
+        fs.mkdir(path.join(path.resolve('.'), name, 'web', 'templates'));
 
         var fileContent = fs.readFileSync(path.join(__dirname, '..', 'files', 'index.ejs'), 'utf8');
         fileContent = fileContent.replace(/\<\<name\>\>/g, name);
         fs.writeFileSync(path.join(path.resolve('.'), name, 'web', 'templates', 'index.ejs'), fileContent);
 
-        var fileContent = fs.readFileSync(path.join(__dirname, '..', 'files', 'shared.webpack.config.js'), 'utf8');
+        fileContent = fs.readFileSync(path.join(__dirname, '..', 'files', 'shared.webpack.config.js'), 'utf8');
         fs.writeFileSync(path.join(path.resolve('.'), name, 'web', 'shared.webpack.config.js'), fileContent);
 
-        var fileContent = fs.readFileSync(path.join(__dirname, '..', 'files', 'vendor.webpack.config.js'), 'utf8');
+        fileContent = fs.readFileSync(path.join(__dirname, '..', 'files', 'vendor.webpack.config.js'), 'utf8');
         fs.writeFileSync(path.join(path.resolve('.'), name, 'web', 'vendor.webpack.config.js'), fileContent);
 
-        var fileContent = fs.readFileSync(path.join(__dirname, '..', 'files', 'webpack.config.js'), 'utf8');
+        fileContent = fs.readFileSync(path.join(__dirname, '..', 'files', 'webpack.config.js'), 'utf8');
         fs.writeFileSync(path.join(path.resolve('.'), name, 'web', 'webpack.config.js'), fileContent);
+
+        fileContent = fs.readFileSync(path.join(__dirname, '..', 'files', 'build.desktop.js'), 'utf8');
+        fs.writeFileSync(path.join(path.resolve('.'), name, 'script', 'build.desktop.js'), fileContent);
     }
 }

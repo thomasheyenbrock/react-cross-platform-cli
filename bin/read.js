@@ -78,11 +78,11 @@ module.exports = function readInput() {
     if (desktop === 'y' || desktop === 'Y') {
         project['main'] = 'index.desktop.js';
         project['scripts']['desktop'] = 'NODE_ENV=development electron . & npm run web';
-        project['scripts']['desktop:build'] = 'python ./electron/script/build.py';
-        project['scripts']['desktop:build:bootstrap'] = 'python ./electron/script/bootstrap.py -v';
-        project['scripts']['desktop:build:debug'] = 'python ./electron/script/build.py -c D';
-        project['scripts']['desktop:clean'] = 'python ./electron/script/clean.py';
+        project['scripts']['desktop:build'] = 'npm run web:build && node script/build.desktop.js';
         project['dependencies']['electron'] = '^1.6.11';
+        project['devDependencies']['electron-packager'] = '^8.7.2';
+        project['devDependencies']['ncp'] = '^2.0.0';
+        project['devDependencies']['rimraf'] = '^2.6.1';
     }
 
     return {
