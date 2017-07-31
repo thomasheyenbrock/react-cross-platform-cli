@@ -25,9 +25,9 @@ module.exports = function copyFiles(name, web, desktop) {
     });
 
     if (web || desktop) {
-        fs.mkdir(path.join(path.resolve('.'), name, 'script'));
-        fs.mkdir(path.join(path.resolve('.'), name, 'web'));
-        fs.mkdir(path.join(path.resolve('.'), name, 'web', 'templates'));
+        fs.mkdirSync(path.join(path.resolve('.'), name, 'script'));
+        fs.mkdirSync(path.join(path.resolve('.'), name, 'web'));
+        fs.mkdirSync(path.join(path.resolve('.'), name, 'web', 'templates'));
 
         var fileContent = fs.readFileSync(path.join(__dirname, '..', 'files', 'index.ejs'), 'utf8');
         fileContent = fileContent.replace(/\<\<name\>\>/g, name);
