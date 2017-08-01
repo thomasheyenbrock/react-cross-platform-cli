@@ -14,7 +14,7 @@ function build(yarn, project) {
     console.log('Initializing application...');
     execSync('react-native init ' + project.project.name);
     fs.writeFileSync(path.join(path.resolve('.'), project.project.name, 'package.json'), JSON.stringify(project.project, null, 2));
-    execSync('cd ' + project.project.name + ' && rm -r -f node_modules && ' + (yarn ? 'yarn' : 'npm install'));
+    execSync('cd ' + project.project.name + ' && ' + (yarn ? 'yarn' : 'npm install'));
 
     console.log('');
     console.log('Copying files...');
