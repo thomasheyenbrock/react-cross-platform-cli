@@ -27,10 +27,13 @@ module.exports = function readInput() {
         name: name,
         version: '0.0.1',
         scripts: {
-            start: 'node node_modules/react-native/local-cli/cli.js start',
-            test: 'jest',
-            android: 'react-native run-android',
-            ios: 'react-native run-ios',
+            'start': 'node node_modules/react-native/local-cli/cli.js start',
+            'test': 'jest',
+            'android': 'react-native start',
+            'android:build': 'node script/build.android.js && react-native run-android',
+            'android:clean': 'node script/clean.android.js',
+            'ios': 'react-native start',
+            'ios:build': 'node script/build.ios.js && react-native run-ios',
             'ios:clean': 'node script/clean.ios.js'
         },
         dependencies: {
