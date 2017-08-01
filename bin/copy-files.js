@@ -16,7 +16,6 @@ module.exports = function copyFiles(name, web, desktop) {
     }
     if (desktop) {
         fileList.push('index.desktop.js');
-        fileList.push('rn-cli.config.js');
     }
 
     fileList.forEach(function(file) {

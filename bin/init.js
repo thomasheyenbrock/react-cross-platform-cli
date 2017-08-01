@@ -44,5 +44,3 @@ module.exports = function init() {
 }
 
 // TODO: remove adjustDesktop
-// TODO: ask for projectName
-// TODO: remove config file for react native
