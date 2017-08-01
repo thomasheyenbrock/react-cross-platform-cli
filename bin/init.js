@@ -2,7 +2,6 @@ var execSync = require('child_process').execSync;
 var fs = require('fs');
 var path = require('path');
 
-var adjustDesktop = require('./adjust-desktop');
 var adjustIos = require('./adjust-ios');
 var copyFiles = require('./copy-files');
 var dependencyReactNativeCli = require('./dependency-react-native-cli');
@@ -24,7 +23,7 @@ function build(yarn, project) {
     console.log('');
     console.log('We did it! Happy coding :)');
     console.log('');
-    
+
     process.exit();
 }
 
