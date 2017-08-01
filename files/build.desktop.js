@@ -15,7 +15,6 @@ var fileContent = fs.readFileSync(path.join(path.resolve('.'), 'index.desktop.js
 fs.writeFileSync(path.join(tempDir, 'index.desktop.js'), fileContent);
 
 var info = JSON.parse(fs.readFileSync(path.join(path.resolve('.'), 'app.json'), 'utf8'));
-console.log(info);
 fileContent = `{
     "name": "${info.name}",
     "productName": "${info.displayName}",
@@ -39,7 +38,7 @@ ncp(path.join(path.resolve('.'), 'web', 'build'), path.join(tempDir, 'web', 'bui
 
         rimraf(tempDir, fs, function() {
             console.log('Build successful!');
-            console.log('Executable created in ' + appPaths[0]);
+            console.log('Executable created in ' + appPaths.join(', '));
             process.exit(0);
         });
     });
