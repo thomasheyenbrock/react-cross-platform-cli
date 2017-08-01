@@ -187,7 +187,6 @@ function startApp() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
         height: 600,
-        title: "whatanapp",
         width: 800
     });
 
