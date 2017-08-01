@@ -43,7 +43,7 @@ module.exports = function readInput() {
             'babel-preset-react-native': '1.9.1',
             'cross-env': '^5.0.2',
             'react-test-renderer': '16.0.0-alpha.6',
-            'rimraf'; '^2.6.1'
+            'rimraf': '^2.6.1'
         },
         jest: {
             preset: 'react-native'
