@@ -31,7 +31,7 @@ module.exports = function readInput() {
             test: 'jest',
             android: 'react-native run-android',
             ios: 'react-native run-ios',
-            'ios:clean': 'rm -r -f ios/build'
+            'ios:clean': 'node script/clean.ios.js'
         },
         dependencies: {
             'react': '16.0.0-alpha.6',
@@ -41,7 +41,9 @@ module.exports = function readInput() {
             'babel-jest': '19.0.0',
             'jest': '19.0.2',
             'babel-preset-react-native': '1.9.1',
-            'react-test-renderer': '16.0.0-alpha.6'
+            'cross-env': '^5.0.2',
+            'react-test-renderer': '16.0.0-alpha.6',
+            'rimraf'; '^2.6.1'
         },
         jest: {
             preset: 'react-native'
@@ -49,12 +51,12 @@ module.exports = function readInput() {
     };
 
     if (web === 'y' || web === 'Y' || desktop === 'y' || desktop === 'Y') {
-        project['scripts']['web'] = '[ -d web/vendor-dev ] || npm run web:build:vendor-dev && NODE_ENV=development webpack-dev-server -d --host 0.0.0.0 --port 3000 --config web/webpack.config.js --inline --hot --colors';
+        project['scripts']['web'] = 'npm run web:build:vendor-dev && cross-env NODE_ENV=development webpack-dev-server -d --host 0.0.0.0 --port 3000 --config web/webpack.config.js --inline --hot --colors';
         project['scripts']['web:build'] = 'npm run web:build:vendor && npm run web:build:app';
-        project['scripts']['web:build:app'] = 'rm -rf web/build; NODE_ENV=production webpack --config web/webpack.config.js';
-        project['scripts']['web:build:vendor-dev'] = 'rm -rf web/vendor-dev; NODE_ENV=development webpack --config web/vendor.webpack.config.js || rm -rf web/vendor-dev';
-        project['scripts']['web:build:vendor'] = 'rm -rf web/vendor; NODE_ENV=production webpack --config web/vendor.webpack.config.js';
-        project['scripts']['web:clean'] = 'rm -rf web/vendor web/vendor-dev web/build';
+        project['scripts']['web:build:app'] = 'node script/build.app.web.js; cross-env NODE_ENV=production webpack --config web/webpack.config.js';
+        project['scripts']['web:build:vendor-dev'] = 'node script/build.vendor-dev.web.js; cross-env NODE_ENV=development webpack --config web/vendor.webpack.config.js || node script/build.vendor-dev.web.js';
+        project['scripts']['web:build:vendor'] = 'node script/build.vendor.app.js; cross-env NODE_ENV=production webpack --config web/vendor.webpack.config.js';
+        project['scripts']['web:clean'] = 'node script/clean.web.js';
         project['scripts']['web:serve'] = 'http-serve -p 3001 --gzip true ./web/build';
         project['devDependencies']['add-asset-html-webpack-plugin'] = '^2.0.1';
         project['devDependencies']['babel-loader'] = '^7.0.0';
@@ -77,12 +79,11 @@ module.exports = function readInput() {
 
     if (desktop === 'y' || desktop === 'Y') {
         project['main'] = 'index.desktop.js';
-        project['scripts']['desktop'] = 'NODE_ENV=development electron . & npm run web';
+        project['scripts']['desktop'] = 'cross-env NODE_ENV=development electron . & npm run web';
         project['scripts']['desktop:build'] = 'npm run web:build && node script/build.desktop.js';
         project['dependencies']['electron'] = '^1.6.11';
         project['devDependencies']['electron-packager'] = '^8.7.2';
         project['devDependencies']['ncp'] = '^2.0.0';
-        project['devDependencies']['rimraf'] = '^2.6.1';
     }
 
     return {

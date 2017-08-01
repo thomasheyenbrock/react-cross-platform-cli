@@ -9,6 +9,7 @@ module.exports = function copyFiles(name, web, desktop) {
         'index.android.js',
         'index.ios.js'
     ];
+    var fileContent;
 
     if (web || desktop) {
         fileList.push('index.web.js');
@@ -19,17 +20,21 @@ module.exports = function copyFiles(name, web, desktop) {
     }
 
     fileList.forEach(function(file) {
-        var fileContent = fs.readFileSync(path.join(__dirname, '..', 'files', file), 'utf8');
+        fileContent = fs.readFileSync(path.join(__dirname, '..', 'files', file), 'utf8');
         fileContent = fileContent.replace(/\<\<name\>\>/g, name);
         fs.writeFileSync(path.join(path.resolve('.'), name, file), fileContent);
     });
 
+    fs.mkdirSync(path.join(path.resolve('.'), name, 'script'));
+
+    fileContent = fs.readFileSync(path.join(__dirname, '..', 'files', 'clean.ios.js'), 'utf8');
+    fs.writeFileSync(path.join(path.resolve('.'), name, 'script', 'clean.ios.js'), fileContent);
+
     if (web || desktop) {
-        fs.mkdirSync(path.join(path.resolve('.'), name, 'script'));
         fs.mkdirSync(path.join(path.resolve('.'), name, 'web'));
         fs.mkdirSync(path.join(path.resolve('.'), name, 'web', 'templates'));
 
-        var fileContent = fs.readFileSync(path.join(__dirname, '..', 'files', 'index.ejs'), 'utf8');
+        fileContent = fs.readFileSync(path.join(__dirname, '..', 'files', 'index.ejs'), 'utf8');
         fileContent = fileContent.replace(/\<\<name\>\>/g, name);
         fs.writeFileSync(path.join(path.resolve('.'), name, 'web', 'templates', 'index.ejs'), fileContent);
 
@@ -42,6 +47,20 @@ module.exports = function copyFiles(name, web, desktop) {
         fileContent = fs.readFileSync(path.join(__dirname, '..', 'files', 'webpack.config.js'), 'utf8');
         fs.writeFileSync(path.join(path.resolve('.'), name, 'web', 'webpack.config.js'), fileContent);
 
+        fileContent = fs.readFileSync(path.join(__dirname, '..', 'files', 'build.app.web.js'), 'utf8');
+        fs.writeFileSync(path.join(path.resolve('.'), name, 'script', 'build.app.web.js'), fileContent);
+
+        fileContent = fs.readFileSync(path.join(__dirname, '..', 'files', 'build.vendor-dev.web.js'), 'utf8');
+        fs.writeFileSync(path.join(path.resolve('.'), name, 'script', 'build.vendor-dev.web.js'), fileContent);
+
+        fileContent = fs.readFileSync(path.join(__dirname, '..', 'files', 'build.vendor.web.js'), 'utf8');
+        fs.writeFileSync(path.join(path.resolve('.'), name, 'script', 'build.vendor.web.js'), fileContent);
+
+        fileContent = fs.readFileSync(path.join(__dirname, '..', 'files', 'clean.web.js'), 'utf8');
+        fs.writeFileSync(path.join(path.resolve('.'), name, 'script', 'clean.web.js'), fileContent);
+    }
+
+    if (desktop) {
         fileContent = fs.readFileSync(path.join(__dirname, '..', 'files', 'build.desktop.js'), 'utf8');
         fs.writeFileSync(path.join(path.resolve('.'), name, 'script', 'build.desktop.js'), fileContent);
     }
