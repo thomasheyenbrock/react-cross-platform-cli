@@ -21,12 +21,11 @@ function build(yarn, project) {
     copyFiles(project.project.name, project.web, project.desktop);
     console.log('Adjusting xcode project...');
     adjustIos(project.project.name);
-    adjustDesktop(project.desktop, project.project.name, function() {
-        console.log('');
-        console.log('We did it! Happy coding :)');
-        console.log('');
-        process.exit();
-    });
+    console.log('');
+    console.log('We did it! Happy coding :)');
+    console.log('');
+    
+    process.exit();
 }
 
 module.exports = function init() {
@@ -42,5 +41,3 @@ module.exports = function init() {
         });
     });
 }
-
-// TODO: remove adjustDesktop
