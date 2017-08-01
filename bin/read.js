@@ -79,7 +79,7 @@ module.exports = function readInput() {
 
     if (desktop === 'y' || desktop === 'Y') {
         project['main'] = 'index.desktop.js';
-        project['scripts']['desktop'] = 'cross-env NODE_ENV=development electron . & npm run web';
+        project['scripts']['desktop'] = 'node script/run.desktop.js';
         project['scripts']['desktop:build'] = 'npm run web:build && node script/build.desktop.js';
         project['dependencies']['electron'] = '^1.6.11';
         project['devDependencies']['electron-packager'] = '^8.7.2';

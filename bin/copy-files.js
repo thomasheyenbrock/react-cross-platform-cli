@@ -63,5 +63,8 @@ module.exports = function copyFiles(name, web, desktop) {
     if (desktop) {
         fileContent = fs.readFileSync(path.join(__dirname, '..', 'files', 'build.desktop.js'), 'utf8');
         fs.writeFileSync(path.join(path.resolve('.'), name, 'script', 'build.desktop.js'), fileContent);
+
+        fileContent = fs.readFileSync(path.join(__dirname, '..', 'files', 'run.desktop.js'), 'utf8');
+        fs.writeFileSync(path.join(path.resolve('.'), name, 'script', 'run.desktop.js'), fileContent);
     }
 }
