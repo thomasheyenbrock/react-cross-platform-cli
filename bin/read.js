@@ -55,7 +55,7 @@ module.exports = function readInput() {
         project['scripts']['web:build'] = 'npm run web:build:vendor && npm run web:build:app';
         project['scripts']['web:build:app'] = 'node script/build.app.web.js; cross-env NODE_ENV=production webpack --config web/webpack.config.js';
         project['scripts']['web:build:vendor-dev'] = 'node script/build.vendor-dev.web.js; cross-env NODE_ENV=development webpack --config web/vendor.webpack.config.js || node script/build.vendor-dev.web.js';
-        project['scripts']['web:build:vendor'] = 'node script/build.vendor.app.js; cross-env NODE_ENV=production webpack --config web/vendor.webpack.config.js';
+        project['scripts']['web:build:vendor'] = 'node script/build.vendor.web.js; cross-env NODE_ENV=production webpack --config web/vendor.webpack.config.js';
         project['scripts']['web:clean'] = 'node script/clean.web.js';
         project['scripts']['web:serve'] = 'http-serve -p 3001 --gzip true ./web/build';
         project['devDependencies']['add-asset-html-webpack-plugin'] = '^2.0.1';
