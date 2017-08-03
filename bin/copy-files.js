@@ -29,6 +29,9 @@ module.exports = function copyFiles(name, web, desktop) {
     fileContent = fs.readFileSync(path.join(__dirname, '..', 'files', 'build.android.js'), 'utf8');
     fs.writeFileSync(path.join(path.resolve('.'), name, 'script', 'build.android.js'), fileContent);
 
+    fileContent = fs.readFileSync(path.join(__dirname, '..', 'files', 'build.ios.js'), 'utf8');
+    fs.writeFileSync(path.join(path.resolve('.'), name, 'script', 'build.ios.js'), fileContent);
+
     fileContent = fs.readFileSync(path.join(__dirname, '..', 'files', 'clean.android.js'), 'utf8');
     fs.writeFileSync(path.join(path.resolve('.'), name, 'script', 'clean.android.js'), fileContent);
 
