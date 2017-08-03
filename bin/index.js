@@ -23,7 +23,3 @@ switch (options._[0]) {
     case 'init': init(); break;
     default: print.printErrorAndExit();
 }
-
-// TODO: bundle app with asar and copy in application in the desktop build (debug and release)
-// TODO: add new scripts to readme
-// TODO: script for serving desktop production build (cross platform)
