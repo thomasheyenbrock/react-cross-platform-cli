@@ -31,7 +31,7 @@ module.exports = function readInput() {
             'test': 'jest',
             'android': 'react-native start',
             'android:build': 'node script/build.android.js && react-native run-android',
-            'android:build:production': 'cd android && (./gradlew assembleRelease || gradlew assembleRelease)',
+            'android:build:app': 'cd android && (./gradlew assembleRelease || gradlew assembleRelease)',
             'android:clean': 'node script/clean.android.js',
             'ios': 'react-native start',
             'ios:build': 'node script/build.ios.js && react-native run-ios',
